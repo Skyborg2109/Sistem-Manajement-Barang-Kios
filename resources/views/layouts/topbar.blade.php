@@ -133,7 +133,7 @@
 
             <div x-show="dropdownOpen" @click.away="dropdownOpen = false" class="absolute right-0 w-56 mt-3 overflow-hidden bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_40px_rgb(0,0,0,0.08)] border border-slate-100 z-50 transform origin-top-right transition-all" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" style="display: none;">
                 <div class="px-4 py-3 border-b border-slate-100 bg-slate-50/50">
-                    <p class="text-xs text-slate-500 font-medium">Masuk sebagai</p>
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">{{ $site_settings['shop_name'] ?? 'M-KIOS' }}</p>
                     <p class="text-sm font-bold text-slate-800 truncate">{{ Auth::user()->email }}</p>
                 </div>
                 <div class="p-2 pt-2 pb-2">

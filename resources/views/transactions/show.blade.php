@@ -21,17 +21,19 @@
     <div class="max-w-3xl mx-auto">
         <div class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100/80 p-10 animate-in fade-in slide-in-from-bottom-6 duration-700" id="receipt">
             <!-- Print-only Shop Header -->
-            <div class="hidden print:block text-center mb-6">
-                <h2 class="text-2xl font-black tracking-tighter uppercase">{{ config('app.name', 'M-KIOS') }}</h2>
-                <p class="text-xs">Solusi Manajemen Kasir Modern</p>
-                <div class="border-b border-dashed border-black my-4"></div>
+            <div class="hidden print:block text-center mb-8">
+                <h2 class="text-2xl font-black tracking-tighter uppercase mb-1">{{ $site_settings['shop_name'] ?? 'M-KIOS' }}</h2>
+                <p class="text-[10px] font-bold text-slate-600 uppercase tracking-widest">{{ $site_settings['shop_address'] ?? 'Alamat Belum Diatur' }}</p>
+                <p class="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Telp: {{ $site_settings['shop_phone'] ?? '-' }}</p>
+                <div class="border-b border-dashed border-slate-300 my-6"></div>
             </div>
             
             <!-- Header Invoice -->
             <div class="flex flex-col sm:flex-row justify-between border-b border-slate-100 pb-8 mb-8 gap-6">
                 <div>
-                    <h1 class="text-3xl font-black text-slate-800 tracking-tighter">INVOICE</h1>
-                    <p class="text-emerald-600 font-bold mt-1 text-lg">{{ $transaction->invoice_code }}</p>
+                    <h1 class="text-3xl font-black text-slate-800 tracking-tighter uppercase">{{ $site_settings['shop_name'] ?? 'M-KIOS' }}</h1>
+                    <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mt-1">{{ $site_settings['shop_address'] ?? 'Solusi Kasir Modern' }}</p>
+                    <p class="text-emerald-600 font-bold mt-4 text-lg">INV #{{ $transaction->invoice_code }}</p>
                 </div>
                 <div class="sm:text-right">
                     <p class="text-slate-500 font-medium text-sm mb-1">Tanggal & Waktu</p>

@@ -39,8 +39,9 @@
                     </div>
                 @endforeach
                 
-                <div class="flex items-center justify-end pt-4">
-                    <button type="submit" class="px-10 py-4 bg-slate-800 text-white font-extrabold rounded-2xl hover:bg-slate-700 hover:shadow-xl transition-all active:scale-95 shadow-lg shadow-slate-200">
+                <div class="flex justify-end pt-2">
+                    <button type="submit" class="px-8 py-3 bg-emerald-600 text-white text-sm font-bold uppercase tracking-wider rounded-2xl hover:bg-emerald-700 hover:shadow-lg hover:shadow-emerald-500/20 transition-all active:scale-95 shadow-md shadow-emerald-500/10 flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                         Simpan Perubahan
                     </button>
                 </div>

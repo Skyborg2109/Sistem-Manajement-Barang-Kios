@@ -19,7 +19,20 @@
         <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/30 text-white mr-3">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
         </div>
-        <span class="text-2xl font-extrabold tracking-tight text-white">M-KIOS<span class="text-emerald-400">.</span></span>
+        <div class="flex flex-col">
+            <span class="text-xl font-black tracking-tight text-white leading-tight uppercase">{{ $site_settings['shop_name'] ?? 'M-KIOS' }}</span>
+            <div class="flex flex-col mt-0.5">
+                <span class="text-[10px] font-bold text-emerald-400 tracking-[0.15em] uppercase leading-tight">Management System</span>
+                @if(isset($site_settings['shop_address']))
+                    <div class="flex items-center gap-1.5 mt-2 py-1 px-2.5 bg-white/5 rounded-lg border border-white/5 w-fit">
+                        <svg class="w-2.5 h-2.5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span class="text-[9px] font-bold text-emerald-50 tracking-wide truncate max-w-[120px]" title="{{ $site_settings['shop_address'] }}">
+                            {{ $site_settings['shop_address'] }}
+                        </span>
+                    </div>
+                @endif
+            </div>
+        </div>
     </div>
 
     <!-- Mobile close button -->
