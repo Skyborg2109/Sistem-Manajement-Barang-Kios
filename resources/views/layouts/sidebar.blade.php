@@ -24,9 +24,9 @@
             <div class="flex flex-col mt-0.5">
                 <span class="text-[10px] font-bold text-emerald-400 tracking-[0.15em] uppercase leading-tight">Management System</span>
                 @if(isset($site_settings['shop_address']))
-                    <div class="flex items-center gap-1.5 mt-2 py-1 px-2.5 bg-white/5 rounded-lg border border-white/5 w-fit">
-                        <svg class="w-2.5 h-2.5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        <span class="text-[9px] font-bold text-emerald-50 tracking-wide truncate max-w-[120px]" title="{{ $site_settings['shop_address'] }}">
+                    <div class="flex items-center gap-2 mt-2">
+                        <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span class="text-xs font-extrabold text-white tracking-wide truncate max-w-[180px]" title="{{ $site_settings['shop_address'] }}">
                             {{ $site_settings['shop_address'] }}
                         </span>
                     </div>
