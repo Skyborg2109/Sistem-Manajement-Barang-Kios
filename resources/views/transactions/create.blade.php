@@ -4,65 +4,82 @@
     </x-slot>
 
     <!-- App layout using full width for POS -->
-    <div x-data="posApp()" class="flex flex-col lg:flex-row gap-6 h-auto lg:h-[calc(100vh-140px)] min-h-[600px] animate-in fade-in duration-700">
+    <div x-data="posApp()" class="flex flex-col lg:flex-row gap-6 animate-in fade-in duration-700 pb-10">
         <!-- Left: Product List -->
-        <div class="flex flex-col flex-[2] bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100/80 overflow-hidden h-full">
-            <div class="p-4 border-b border-slate-100/80 bg-slate-50/50">
-                <input type="text" x-model="search" placeholder="Cari barang..." class="w-full px-4 py-3 border border-slate-200 rounded-xl bg-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors">
+        <div class="flex flex-col flex-[2] bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100/80 overflow-hidden min-h-[600px]">
+            <div class="p-5 border-b border-slate-100/80 bg-slate-50/50 flex items-center justify-between gap-4">
+                <div class="relative flex-1">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg class="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                    </div>
+                    <input type="text" x-model="search" placeholder="Cari barang berdasarkan nama atau kode..." class="w-full pl-11 pr-4 py-3 border border-slate-200 rounded-xl bg-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all font-medium">
+                </div>
             </div>
             
-            <div class="flex-1 overflow-y-auto p-4 hide-scrollbar grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 items-start content-start">
+            <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 p-5 content-start">
                 <template x-for="product in filteredProducts" :key="product.id">
-                    <button @click="addToCart(product)" :disabled="product.stock <= 0" class="group text-left p-4 rounded-2xl border transition-all duration-200" :class="product.stock > 0 ? 'border-slate-100 hover:border-emerald-300 hover:shadow-[0_8px_20px_rgb(16,185,129,0.1)] bg-white' : 'border-red-100 bg-red-50/50 opacity-60 cursor-not-allowed'">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="px-2 py-0.5 text-[10px] font-bold rounded-md bg-slate-100 text-slate-500" x-text="product.unit"></span>
-                            <span class="px-2 py-0.5 text-[10px] font-bold rounded-md" :class="product.stock > 0 ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'" x-text="product.stock > 0 ? 'Sisa: ' + product.stock : 'Habis'"></span>
+                    <button @click="addToCart(product)" :disabled="product.stock <= 0" class="group text-left p-4 rounded-3xl border transition-all duration-300 relative overflow-hidden" :class="product.stock > 0 ? 'border-slate-100 hover:border-emerald-400 hover:shadow-[0_15px_30px_rgb(16,185,129,0.12)] bg-white' : 'border-red-100 bg-red-50/30 opacity-60 cursor-not-allowed'">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2.5 py-1 text-[9px] font-black rounded-lg bg-slate-100 text-slate-500 uppercase tracking-wider" x-text="product.unit"></span>
+                            <span class="px-2.5 py-1 text-[9px] font-black rounded-lg uppercase tracking-wider" :class="product.stock > 0 ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'" x-text="product.stock > 0 ? 'Stok: ' + product.stock : 'Habis'"></span>
                         </div>
-                        <h4 class="font-bold text-slate-800 text-sm mb-1 line-clamp-2 min-h-[40px]" x-text="product.name"></h4>
-                        <p class="font-extrabold text-emerald-600 text-md" x-text="formatRupiah(product.price)"></p>
+                        <h4 class="font-extrabold text-slate-800 text-sm mb-2 line-clamp-2 min-h-[40px] leading-tight" x-text="product.name"></h4>
+                        <div class="flex items-center justify-between mt-2">
+                            <p class="font-black text-emerald-600 text-lg" x-text="formatRupiah(product.price)"></p>
+                            <div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                            </div>
+                        </div>
                     </button>
                 </template>
-                <div x-show="filteredProducts.length === 0" class="col-span-full text-center py-10 text-slate-500">Barang tidak ditemukan.</div>
+                <div x-show="filteredProducts.length === 0" class="col-span-full text-center py-20 text-slate-400 font-bold uppercase tracking-widest text-xs">Produk tidak tersedia</div>
             </div>
         </div>
 
         <!-- Right: Cart & Payment -->
-        <div class="flex flex-col flex-1 bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-100/80 overflow-hidden h-full">
-            <div class="p-4 border-b border-slate-100/80 bg-slate-50/50">
-                <h3 class="font-bold text-lg text-slate-800 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                    Keranjang
+        <div class="flex flex-col flex-1 bg-white rounded-3xl shadow-[0_15px_50px_rgb(0,0,0,0.06)] border border-slate-100/80 overflow-hidden h-fit sticky top-6">
+            <div class="p-5 border-b border-slate-100/80 bg-slate-50/50">
+                <h3 class="font-black text-lg text-slate-800 flex items-center gap-2 uppercase tracking-wider">
+                    <div class="p-2 bg-emerald-500 rounded-lg text-white">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    </div>
+                    Keranjang Belanja
                 </h3>
             </div>
             
-            <div class="flex-1 overflow-y-auto p-4 hide-scrollbar">
-                <div x-show="cart.length === 0" class="text-center py-10 text-slate-400 font-medium">Belum ada barang di keranjang.</div>
+            <div class="p-5 max-h-[500px] overflow-y-auto hide-scrollbar">
+                <div x-show="cart.length === 0" class="text-center py-20">
+                    <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-slate-200 mx-auto mb-4 border-4 border-white shadow-inner">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    </div>
+                    <p class="text-xs font-black text-slate-400 uppercase tracking-widest">Keranjang Kosong</p>
+                </div>
                 
-                <div class="space-y-3">
+                <div class="space-y-4">
                     <template x-for="(item, index) in cart" :key="index">
-                        <div class="p-3 border border-slate-100 rounded-2xl bg-white shadow-sm hover:shadow-md transition-all duration-300">
+                        <div class="p-4 border border-slate-100 rounded-2xl bg-white shadow-sm hover:shadow-md transition-all duration-300">
                             <!-- Name & Remove Row -->
-                            <div class="flex gap-2 items-start mb-2">
-                                <span class="flex-shrink-0 w-5 h-5 bg-slate-100 text-slate-500 rounded text-[10px] flex items-center justify-center font-bold" x-text="index + 1"></span>
-                                <h5 class="text-[13px] font-bold text-slate-800 leading-tight flex-1" x-text="item.name"></h5>
-                                <button @click="removeItem(index)" class="flex-shrink-0 text-slate-300 hover:text-red-500 transition-colors">
+                            <div class="flex gap-3 items-start mb-4">
+                                <div class="flex-shrink-0 w-6 h-6 bg-slate-800 text-white rounded-lg text-[10px] flex items-center justify-center font-black" x-text="index + 1"></div>
+                                <h5 class="text-[14px] font-bold text-slate-800 leading-snug flex-1" x-text="item.name"></h5>
+                                <button @click="removeItem(index)" class="flex-shrink-0 text-slate-300 hover:text-red-500 transition-colors bg-slate-50 p-1.5 rounded-lg">
                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                                 </button>
                             </div>
                             
                             <!-- Price & Qty Row -->
-                            <div class="flex items-center justify-between mt-1">
+                            <div class="flex items-center justify-between mt-2 pt-3 border-t border-slate-50">
                                 <div class="flex flex-col">
-                                    <span class="text-xs font-black text-emerald-600" x-text="formatRupiah(item.price)"></span>
-                                    <span class="text-[9px] font-bold text-slate-300 italic" x-text="'Stok: ' + item.max_stock"></span>
+                                    <span class="text-sm font-black text-emerald-600" x-text="formatRupiah(item.price)"></span>
+                                    <span class="text-[10px] font-bold text-slate-300 italic" x-text="'Stok: ' + item.max_stock"></span>
                                 </div>
                                 
-                                <div class="flex items-center bg-slate-50 border border-slate-200 rounded-lg overflow-hidden h-7">
-                                    <button @click="updateQty(index, -1)" class="w-7 h-full flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-white transition-colors">
+                                <div class="flex items-center bg-slate-100 border border-slate-200 rounded-xl overflow-hidden p-0.5">
+                                    <button @click="updateQty(index, -1)" class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-white rounded-lg transition-all">
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" /></svg>
                                     </button>
-                                    <input type="text" x-model.number="item.qty" @change="checkQty(index)" class="w-8 text-center text-xs font-black border-none focus:ring-0 p-0 text-slate-800 bg-transparent">
-                                    <button @click="updateQty(index, 1)" class="w-7 h-full flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:bg-white transition-colors">
+                                    <input type="text" x-model.number="item.qty" @change="checkQty(index)" class="w-10 text-center text-sm font-black border-none focus:ring-0 p-0 text-slate-800 bg-transparent">
+                                    <button @click="updateQty(index, 1)" class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:bg-white rounded-lg transition-all">
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
                                     </button>
                                 </div>
