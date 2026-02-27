@@ -23,18 +23,17 @@
         @endphp
         <div class="relative" x-data="{ 
             notificationsOpen: false, 
-            unread: {{ $unreadCount }},
+            unread: {{ \App\Models\Activity::unreadCount() }},
             markAsRead() {
                 if(this.unread > 0) {
+                    this.unread = 0;
                     fetch('{{ route('activities.markAsRead') }}', {
                         method: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': '{{ csrf_token() }}',
                             'Content-Type': 'application/json'
                         }
-                    }).then(() => {
-                        this.unread = 0;
-                    });
+                    }).catch(err => console.error(err));
                 }
             },
             toggleNotifications() {
