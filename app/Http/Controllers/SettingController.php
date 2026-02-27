@@ -23,11 +23,14 @@ class SettingController extends Controller
 
     public function initialize()
     {
-        \Artisan::call('db:seed', [
-            '--class' => 'SettingSeeder',
-            '--force' => true
-        ]);
-
-        return back()->with('success', 'Data pengaturan dasar berhasil dibuat!');
+        try {
+            \Artisan::call('db:seed', [
+                '--class' => 'Database\\Seeders\\SettingSeeder',
+                '--force' => true
+            ]);
+            return back()->with('success', 'Data pengaturan dasar berhasil dibuat!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal inisialisasi: ' . $e->getMessage());
+        }
     }
 }

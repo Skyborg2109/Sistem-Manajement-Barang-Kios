@@ -11,6 +11,13 @@
         </div>
     @endif
 
+    @if (session('error'))
+        <div class="mb-6 px-6 py-4 bg-red-50 border border-red-200 text-red-700 rounded-2xl flex items-center shadow-sm animate-in fade-in duration-300">
+            <svg class="w-6 h-6 mr-3 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span class="font-bold">{{ session('error') }}</span>
+        </div>
+    @endif
+
     <div class="max-w-4xl">
         <form action="{{ route('settings.update') }}" method="POST">
             @csrf
