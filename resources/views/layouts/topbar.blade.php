@@ -23,15 +23,17 @@
         @endphp
         <div class="relative" x-data="{ 
             notificationsOpen: false, 
-            unread: {{ \App\Models\Activity::unreadCount() }},
+            unread: {{ \App\Models\Activity::where('is_read', false)->count() }},
             markAsRead() {
                 if(this.unread > 0) {
                     this.unread = 0;
+                    // Provide alternate method via link/form if fetch is unreliable in some environments
                     fetch('{{ route('activities.markAsRead') }}', {
                         method: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
                         }
                     }).catch(err => console.error(err));
                 }
@@ -61,12 +63,12 @@
                 
                 <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50 flex justify-between items-center">
                     <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Aktivitas Terkini</span>
-                    <span x-show="unread > 0" class="bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full whitespace-nowrap shadow-sm">
-                        <span x-text="unread"></span> Baru
-                    </span>
-                    <span x-show="unread === 0" class="bg-slate-200 text-slate-500 text-[10px] font-black px-3 py-1 rounded-full whitespace-nowrap">
-                        Terbaca
-                    </span>
+                    <form action="{{ route('activities.markAsRead') }}" method="POST" class="m-0">
+                        @csrf
+                        <button type="submit" class="bg-emerald-500 text-white text-[9px] font-black px-3 py-1.5 rounded-full whitespace-nowrap shadow-sm hover:bg-emerald-600 transition-colors uppercase tracking-wider">
+                            Tandai Semua Dibaca
+                        </button>
+                    </form>
                 </div>
 
                 <div class="max-h-[400px] overflow-y-auto divide-y divide-slate-50">

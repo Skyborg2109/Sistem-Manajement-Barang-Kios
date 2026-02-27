@@ -12,9 +12,14 @@ class ActivityController extends Controller
         return view('activities.index', compact('activities'));
     }
 
-    public function markAsRead()
+    public function markAsRead(Request $request)
     {
         \App\Models\Activity::where('is_read', false)->update(['is_read' => true]);
-        return response()->json(['success' => true]);
+        
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json(['success' => true]);
+        }
+
+        return back()->with('success', 'Semua notifikasi telah ditandai sebagai dibaca.');
     }
 }
