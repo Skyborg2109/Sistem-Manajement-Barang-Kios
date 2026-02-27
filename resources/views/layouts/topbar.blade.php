@@ -1,4 +1,4 @@
-<header class="flex items-center justify-between px-8 py-5 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 shadow-[0_4px_20px_rgb(0,0,0,0.02)] z-20 w-full relative">
+<header class="flex items-center justify-between px-4 md:px-8 py-5 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 shadow-[0_4px_20px_rgb(0,0,0,0.02)] z-20 w-full relative">
     <div class="flex items-center">
         <button @click="sidebarOpen = !sidebarOpen" class="text-slate-500 hover:text-emerald-600 focus:outline-none md:hidden transition-colors mr-4 bg-slate-100/80 p-2 rounded-xl">
             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div class="flex items-center gap-6">
+    <div class="flex items-center gap-2 sm:gap-6">
         @php
             $activities = \App\Models\Activity::getLatest(5);
             $unreadCount = \App\Models\Activity::unreadCount();
@@ -52,8 +52,7 @@
 
             <!-- Notification Dropdown -->
             <div x-show="notificationsOpen" @click.away="notificationsOpen = false" 
-                class="absolute right-0 w-96 mt-3 bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 z-50 transform origin-top-right transition-all overflow-hidden" 
-                style="width: 380px;"
+                class="absolute right-[-5.5rem] sm:right-0 w-[calc(100vw-2rem)] sm:w-[380px] mt-3 bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 z-50 transform origin-top-right transition-all overflow-hidden" 
                 x-transition:enter="transition ease-out duration-200" 
                 x-transition:enter-start="opacity-0 scale-95" 
                 x-transition:enter-end="opacity-100 scale-100" 
@@ -61,12 +60,12 @@
                 x-transition:leave-start="opacity-100 scale-100" 
                 x-transition:leave-end="opacity-0 scale-95">
                 
-                <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50 flex justify-between items-center">
-                    <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Aktivitas Terkini</span>
+                <div class="px-4 sm:px-6 py-4 border-b border-slate-50 bg-slate-50/50 flex justify-between items-center gap-2">
+                    <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] whitespace-nowrap">Aktivitas</span>
                     <form action="{{ route('activities.markAsRead') }}" method="POST" class="m-0">
                         @csrf
                         <button type="submit" class="bg-emerald-500 text-white text-[9px] font-black px-3 py-1.5 rounded-full whitespace-nowrap shadow-sm hover:bg-emerald-600 transition-colors uppercase tracking-wider">
-                            Tandai Semua Dibaca
+                            Tandai Baca
                         </button>
                     </form>
                 </div>
