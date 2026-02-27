@@ -20,4 +20,14 @@ class SettingController extends Controller
 
         return back()->with('success', 'Pengaturan berhasil diperbarui!');
     }
+
+    public function initialize()
+    {
+        \Artisan::call('db:seed', [
+            '--class' => 'SettingSeeder',
+            '--force' => true
+        ]);
+
+        return back()->with('success', 'Data pengaturan dasar berhasil dibuat!');
+    }
 }

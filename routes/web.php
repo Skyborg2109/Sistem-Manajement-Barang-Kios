@@ -35,6 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('users', UserController::class);
     
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::post('/settings/initialize', [SettingController::class, 'initialize'])->name('settings.initialize');
     Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
     
     // Modules for Admin and Kasir

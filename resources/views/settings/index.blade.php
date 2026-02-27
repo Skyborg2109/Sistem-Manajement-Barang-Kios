@@ -17,7 +17,7 @@
             @method('PUT')
             
             <div class="space-y-6">
-                @foreach($settings as $group => $items)
+                @forelse($settings as $group => $items)
                     <div class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100/80 overflow-hidden">
                         <div class="px-8 py-6 border-b border-slate-50 bg-slate-50/30">
                             <h3 class="text-lg font-extrabold text-slate-800 uppercase tracking-tight">{{ ucfirst($group) }}</h3>
@@ -37,14 +37,33 @@
                             @endforeach
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100/80 p-16 text-center">
+                        <div class="w-24 h-24 bg-slate-50 rounded-[2.5rem] flex items-center justify-center text-slate-300 mx-auto mb-6 border-4 border-white shadow-inner">
+                            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.543-.426-1.543-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-800 mb-2">Data Pengaturan Kosong</h3>
+                        <p class="text-slate-500 max-w-sm mx-auto mb-8 font-medium">Sepertinya data pengaturan dasar belum dibuat di database Railway Anda.</p>
+                        
+                        <div class="flex flex-col sm:flex-row justify-center gap-4">
+                            <form action="{{ route('settings.initialize') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="px-8 py-3 bg-emerald-600 text-white font-bold rounded-2xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-500/20">
+                                    Inisialisasi Data Dasar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                @endforelse
                 
+                @if($settings->count() > 0)
                 <div class="flex justify-end pt-2">
                     <button type="submit" class="px-8 py-3 bg-emerald-600 text-white text-sm font-bold uppercase tracking-wider rounded-2xl hover:bg-emerald-700 hover:shadow-lg hover:shadow-emerald-500/20 transition-all active:scale-95 shadow-md shadow-emerald-500/10 flex items-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                         Simpan Perubahan
                     </button>
                 </div>
+                @endif
             </div>
         </form>
     </div>
