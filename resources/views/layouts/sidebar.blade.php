@@ -16,8 +16,8 @@
     <div class="absolute top-0 left-0 right-0 h-40 bg-emerald-500/10 blur-3xl pointer-events-none"></div>
 
     <div class="flex items-center px-8 py-8 relative z-10">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/30 text-white mr-3">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-lg shadow-emerald-500/10 mr-3 overflow-hidden">
+            <img src="{{ asset('images/logo.png') }}" alt="M-KIOS" class="w-full h-full object-cover">
         </div>
         <div class="flex flex-col">
             <span class="text-xl font-black tracking-tight text-white leading-tight uppercase">{{ $site_settings['shop_name'] ?? 'M-KIOS' }}</span>
