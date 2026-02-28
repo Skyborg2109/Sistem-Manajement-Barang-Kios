@@ -16,8 +16,8 @@
     <div class="absolute top-0 left-0 right-0 h-40 bg-emerald-500/10 blur-3xl pointer-events-none"></div>
 
     <div class="flex items-center px-8 py-8 relative z-10">
-        <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-lg shadow-emerald-500/10 mr-3 overflow-hidden">
-            <img src="{{ asset('images/logo.png') }}" alt="M-KIOS" class="w-full h-full object-cover">
+        <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center shadow-lg shadow-emerald-500/10 mr-4 overflow-hidden p-1">
+            <img src="{{ asset('images/logo.png') }}" alt="M-KIOS" class="w-full h-full object-contain">
         </div>
         <div class="flex flex-col">
             <span class="text-xl font-black tracking-tight text-white leading-tight uppercase">{{ $site_settings['shop_name'] ?? 'M-KIOS' }}</span>
