@@ -15,23 +15,29 @@
     <!-- Subtle glow effect behind logo -->
     <div class="absolute top-0 left-0 right-0 h-40 bg-emerald-500/10 blur-3xl pointer-events-none"></div>
 
-    <div class="flex items-center px-8 py-8 relative z-10">
-        <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center shadow-lg shadow-emerald-500/10 mr-4 overflow-hidden p-1">
-            <img src="{{ asset('images/logo.png') }}" alt="M-KIOS" class="w-full h-full object-contain">
+    <div class="flex items-center px-6 py-8 relative z-10">
+        <div class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-lg shadow-emerald-500/10 mr-3 overflow-hidden p-1 shrink-0">
+            <img src="{{ asset('images/logo.png') }}" alt="M-KIOS Logo" class="w-full h-full object-contain">
         </div>
-        <div class="flex flex-col">
-            <span class="text-xl font-black tracking-tight text-white leading-tight uppercase">{{ $site_settings['shop_name'] ?? 'M-KIOS' }}</span>
-            <div class="flex flex-col mt-0.5">
-                <span class="text-[10px] font-bold text-emerald-400 tracking-[0.15em] uppercase leading-tight">Management System</span>
-                @if(isset($site_settings['shop_address']))
-                    <div class="flex items-center gap-2 mt-2">
-                        <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        <span class="text-xs font-extrabold text-white tracking-wide truncate max-w-[180px]" title="{{ $site_settings['shop_address'] }}">
-                            {{ $site_settings['shop_address'] }}
-                        </span>
-                    </div>
-                @endif
-            </div>
+        <div class="flex flex-col min-w-0">
+            <span class="text-xl font-black tracking-tight text-white leading-none uppercase">M-KIOS</span>
+            <span class="text-[10px] font-bold text-emerald-400 tracking-[0.1em] uppercase leading-tight mt-1">Management System</span>
+            
+            @if(isset($site_settings['shop_name']))
+                <div class="mt-3 flex flex-col">
+                    <span class="text-[11px] font-bold text-emerald-100/90 truncate uppercase" title="{{ $site_settings['shop_name'] }}">
+                        {{ $site_settings['shop_name'] }}
+                    </span>
+                    @if(isset($site_settings['shop_address']))
+                        <div class="flex items-start gap-1.5 mt-1 border-t border-emerald-500/20 pt-1">
+                            <svg class="w-3 h-3 text-emerald-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span class="text-[9px] font-medium text-emerald-200/70 leading-relaxed line-clamp-2" title="{{ $site_settings['shop_address'] }}">
+                                {{ $site_settings['shop_address'] }}
+                            </span>
+                        </div>
+                    @endif
+                </div>
+            @endif
         </div>
     </div>
 
