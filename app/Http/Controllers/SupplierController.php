@@ -29,9 +29,10 @@ class SupplierController extends Controller
         return redirect()->route('suppliers.index')->with('success', 'Supplier berhasil ditambahkan.');
     }
 
-    public function edit(\App\Models\Supplier $supplier)
+    public function edit(Request $request, \App\Models\Supplier $supplier)
     {
-        return view('suppliers.edit', compact('supplier'));
+        $page = $request->query('page', 1);
+        return view('suppliers.edit', compact('supplier', 'page'));
     }
 
     public function update(Request $request, \App\Models\Supplier $supplier)
@@ -43,12 +44,16 @@ class SupplierController extends Controller
         ]);
 
         $supplier->update($request->all());
-        return redirect()->route('suppliers.index')->with('success', 'Supplier berhasil diperbarui.');
+        
+        return redirect()->route('suppliers.index', ['page' => $request->page])
+            ->with('success', 'Supplier berhasil diperbarui.');
     }
 
-    public function destroy(\App\Models\Supplier $supplier)
+    public function destroy(Request $request, \App\Models\Supplier $supplier)
     {
         $supplier->delete();
-        return redirect()->route('suppliers.index')->with('success', 'Supplier berhasil dihapus.');
+        
+        return redirect()->route('suppliers.index', ['page' => $request->page])
+            ->with('success', 'Supplier berhasil dihapus.');
     }
 }

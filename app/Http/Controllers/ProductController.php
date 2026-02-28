@@ -35,10 +35,11 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Barang berhasil ditambahkan.');
     }
 
-    public function edit(\App\Models\Product $product)
+    public function edit(Request $request, \App\Models\Product $product)
     {
         $categories = \App\Models\Category::all();
-        return view('products.edit', compact('product', 'categories'));
+        $page = $request->query('page', 1);
+        return view('products.edit', compact('product', 'categories', 'page'));
     }
 
     public function update(Request $request, \App\Models\Product $product)
@@ -55,16 +56,20 @@ class ProductController extends Controller
 
         $product->update($request->all());
         \App\Models\Activity::log("Memperbarui data barang: " . $product->name, 'inventory');
-        return redirect()->route('products.index')->with('success', 'Barang berhasil diperbarui.');
+        
+        return redirect()->route('products.index', ['page' => $request->page])
+            ->with('success', 'Barang berhasil diperbarui.');
     }
 
-    public function destroy(\App\Models\Product $product)
+    public function destroy(Request $request, \App\Models\Product $product)
     {
         // Prevent deletion if associated with transactions or purchases
         // For simplicity, we just delete
         $name = $product->name;
         $product->delete();
         \App\Models\Activity::log("Menghapus barang: " . $name, 'inventory');
-        return redirect()->route('products.index')->with('success', 'Barang berhasil dihapus.');
+        
+        return redirect()->route('products.index', ['page' => $request->page])
+            ->with('success', 'Barang berhasil dihapus.');
     }
 }

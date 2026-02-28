@@ -30,9 +30,10 @@ class CustomerController extends Controller
         return redirect()->route('customers.index')->with('success', 'Pelanggan berhasil ditambahkan.');
     }
 
-    public function edit(\App\Models\Customer $customer)
+    public function edit(Request $request, \App\Models\Customer $customer)
     {
-        return view('customers.edit', compact('customer'));
+        $page = $request->query('page', 1);
+        return view('customers.edit', compact('customer', 'page'));
     }
 
     public function update(Request $request, \App\Models\Customer $customer)
@@ -45,14 +46,18 @@ class CustomerController extends Controller
 
         $customer->update($request->all());
         \App\Models\Activity::log("Memperbarui data pelanggan: " . $customer->name, 'customer');
-        return redirect()->route('customers.index')->with('success', 'Pelanggan berhasil diperbarui.');
+        
+        return redirect()->route('customers.index', ['page' => $request->page])
+            ->with('success', 'Pelanggan berhasil diperbarui.');
     }
 
-    public function destroy(\App\Models\Customer $customer)
+    public function destroy(Request $request, \App\Models\Customer $customer)
     {
         $name = $customer->name;
         $customer->delete();
         \App\Models\Activity::log("Menghapus data pelanggan: " . $name, 'customer');
-        return redirect()->route('customers.index')->with('success', 'Pelanggan berhasil dihapus.');
+        
+        return redirect()->route('customers.index', ['page' => $request->page])
+            ->with('success', 'Pelanggan berhasil dihapus.');
     }
 }

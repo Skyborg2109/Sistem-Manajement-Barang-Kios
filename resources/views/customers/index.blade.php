@@ -42,10 +42,10 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">{{ $customer->phone ?? '-' }}</td>
                         <td class="px-6 py-4 text-sm text-slate-600 max-w-xs truncate">{{ $customer->address ?? '-' }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-right flex justify-end gap-2">
-                            <a href="{{ route('customers.edit', $customer->id) }}" class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" title="Edit">
+                            <a href="{{ route('customers.edit', [$customer->id, 'page' => $customers->currentPage()]) }}" class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" title="Edit">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                             </a>
-                            <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin?');">
+                            <form action="{{ route('customers.destroy', [$customer->id, 'page' => $customers->currentPage()]) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Hapus">

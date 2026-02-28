@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-4">
-            <a href="{{ route('customers.index') }}" class="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors">
+            <a href="{{ route('customers.index', ['page' => $page ?? 1]) }}" class="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             </a>
             <div>
@@ -15,6 +15,7 @@
             @csrf
             @if(isset($customer))
                 @method('PUT')
+                <input type="hidden" name="page" value="{{ $page ?? 1 }}">
             @endif
             
             <div>
@@ -36,7 +37,7 @@
             </div>
 
             <div class="flex justify-end gap-3 pt-4 border-t border-slate-100 text-right mt-8">
-                <a href="{{ route('customers.index') }}" class="px-5 py-2.5 text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors">Batal</a>
+                <a href="{{ route('customers.index', ['page' => $page ?? 1]) }}" class="px-5 py-2.5 text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors">Batal</a>
                 <button type="submit" class="px-5 py-2.5 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 shadow-lg shadow-emerald-500/20 rounded-xl transition-all">
                     Simpan Pelanggan
                 </button>
