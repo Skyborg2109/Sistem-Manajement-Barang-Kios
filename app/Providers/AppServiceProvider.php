@@ -19,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (config('app.env') !== 'local') {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         // Share settings globally
         if (!app()->runningInConsole()) {
             $settings = \App\Models\Setting::all()->pluck('value', 'key');
