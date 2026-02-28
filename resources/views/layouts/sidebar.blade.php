@@ -21,17 +21,17 @@
         </div>
         <div class="flex flex-col min-w-0">
             <span class="text-xl font-black tracking-tight text-white leading-none uppercase">M-KIOS</span>
-            <span class="text-[10px] font-bold text-emerald-400 tracking-[0.1em] uppercase leading-tight mt-1">Management System</span>
+            <span class="text-[11px] font-bold text-emerald-400 tracking-[0.1em] uppercase leading-tight mt-1">Management System</span>
             
             @if(isset($site_settings['shop_name']))
                 <div class="mt-3 flex flex-col">
-                    <span class="text-[11px] font-bold text-emerald-100/90 truncate uppercase" title="{{ $site_settings['shop_name'] }}">
+                    <span class="text-sm font-extrabold text-white truncate uppercase" title="{{ $site_settings['shop_name'] }}">
                         {{ $site_settings['shop_name'] }}
                     </span>
                     @if(isset($site_settings['shop_address']))
-                        <div class="flex items-start gap-1.5 mt-1 border-t border-emerald-500/20 pt-1">
-                            <svg class="w-3 h-3 text-emerald-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <span class="text-[9px] font-medium text-emerald-200/70 leading-relaxed line-clamp-2" title="{{ $site_settings['shop_address'] }}">
+                        <div class="flex items-start gap-2 mt-1.5 border-t border-emerald-500/20 pt-1.5">
+                            <svg class="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span class="text-[11px] font-semibold text-emerald-200/80 leading-relaxed line-clamp-2" title="{{ $site_settings['shop_address'] }}">
                                 {{ $site_settings['shop_address'] }}
                             </span>
                         </div>
